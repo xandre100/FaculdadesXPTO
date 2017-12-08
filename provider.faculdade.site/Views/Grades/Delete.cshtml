@@ -1,0 +1,63 @@
+﻿@model provider.faculdade.model.Grade
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Exclusão de Grade</h2>
+
+<h3>Confirma a exclusão deste horário na grade?</h3>
+<div>
+    <h4>Grade</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Matrícula
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aluno.Matricula)
+        </dd>
+
+        <dt>
+            Aluno(a)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aluno.Nome)
+        </dd>
+        <dt>
+            Disciplina
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Disciplina.Descricao)
+        </dd>
+
+        <dt>
+            Semestre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Semestre.Descricao)
+        </dd>
+
+        <dt>
+            Turma
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Turma.Turma1)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="EXCLUIR" class="btn btn-default" /> |
+            <STRONG>@Html.ActionLink("VOLTAR", "Index")</STRONG>
+        </div>
+    }
+</div>

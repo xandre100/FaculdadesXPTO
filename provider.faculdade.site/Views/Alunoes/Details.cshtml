@@ -1,0 +1,43 @@
+﻿@model provider.faculdade.model.Aluno
+
+@{
+    ViewBag.Title = "Aluno - Detalhes";
+}
+
+<h2>DETALHES</h2>
+
+<div>
+    <h4>Aluno</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Matricula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Matricula)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CPF)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CPF)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("ATUALIZAR", "Edit", new { id = Model.Matricula }) |
+    @Html.ActionLink("VOLTAR", "Index")
+</p>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<provider.faculdade.model.Grade>
+
+@{
+    ViewBag.Title = "Grade dos Alunos";
+}
+
+<h2>Grade dos Alunos</h2>
+
+<br />
+
+<p>
+    <strong>@Html.ActionLink("NOVO", "Create")</strong>
+</p>
+
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            Matrícula
+        </th>
+        <th>
+            Aluno(a)
+        </th>
+        <th>
+            Disciplina
+        </th>
+        <th>
+            Semestre
+        </th>
+        <th>
+            Turma
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aluno.Matricula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aluno.Nome)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Disciplina.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Semestre.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Turma.Turma1)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Detalhes", "Details", new { idDisciplina = item.IdDisciplina, idSemestre = item.IdSemestre, idTurma = item.IdTurma, matricula = item.Matricula }) |
+            @Html.ActionLink("Excluir", "Delete", new { idDisciplina = item.IdDisciplina, idSemestre = item.IdSemestre, idTurma = item.IdTurma, matricula = item.Matricula })
+        </td>
+    </tr>
+}
+
+</table>

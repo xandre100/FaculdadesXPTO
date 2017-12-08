@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<provider.faculdade.model.Aluno>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Alunos";
 }
 
-<h2>Index</h2>
+<h2>LISTA DE ALUNOS</h2>
 
 <p>
-    @Html.ActionLink("Cadastrar Novo Aluno", "Create")
+    <strong>@Html.ActionLink("NOVO", "Create")</strong>
 </p>
 <table class="table">
     <tr>
@@ -35,7 +35,7 @@
             @Html.DisplayFor(modelItem => item.CPF)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Matricula }) |
+            @Html.ActionLink("Atualizar", "Edit", new { id=item.Matricula }) |
             @Html.ActionLink("Detalhes", "Details", new { id=item.Matricula }) |
             @Html.ActionLink("Excluir", "Delete", new { id=item.Matricula })
         </td>

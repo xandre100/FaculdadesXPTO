@@ -11,7 +11,7 @@ namespace provider.faculdade.model.dal
         where T : class
     {
 
-        BaseContexto ctx = new BaseContexto();
+        public BaseContexto ctx = new BaseContexto();
         
         public Dal()
         {

@@ -13,7 +13,7 @@ namespace provider.faculdade.site.Helpers
 
         }
 
-        public bool ValidarCPF(string cpf)
+        public static bool ValidarCPF(string cpf)
         {
             WCFUtils.ServiceClient proxy = new ServiceClient();
             return proxy.ValidarCpf(cpf);

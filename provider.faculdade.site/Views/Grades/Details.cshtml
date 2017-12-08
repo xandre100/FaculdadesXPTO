@@ -1,0 +1,53 @@
+﻿@model provider.faculdade.model.Grade
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalhes da Grade</h2>
+
+<div>
+    <h4>Aluno(a): @Html.DisplayFor(model => model.Aluno.Nome)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Matrícula
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aluno.Matricula)
+        </dd>
+
+       
+        <dt>
+            Disciplina
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Disciplina.Descricao)
+        </dd>
+
+        <dt>
+            Semestre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Semestre.Descricao)
+        </dd>
+
+        <dt>
+            Turma
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Turma.Turma1)
+        </dd>
+
+        
+
+    </dl>
+</div>
+<p>
+    <STRONG>@Html.ActionLink("VOLTAR", "Index")</STRONG>
+</p>
