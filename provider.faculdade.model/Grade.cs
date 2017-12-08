@@ -19,9 +19,9 @@ namespace provider.faculdade.model
         public int IdTurma { get; set; }
         public int Matricula { get; set; }
     
-        public virtual Aluno Aluno { get; set; }
         public virtual Disciplina Disciplina { get; set; }
         public virtual Semestre Semestre { get; set; }
         public virtual Turma Turma { get; set; }
+        public virtual Aluno Aluno { get; set; }
     }
 }

@@ -25,10 +25,10 @@ namespace provider.faculdade.model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Aluno> Alunoes { get; set; }
         public virtual DbSet<Disciplina> Disciplinas { get; set; }
         public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<Semestre> Semestres { get; set; }
         public virtual DbSet<Turma> Turmas { get; set; }
+        public virtual DbSet<Aluno> Alunoes { get; set; }
     }
 }

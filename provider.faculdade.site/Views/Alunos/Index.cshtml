@@ -1,0 +1,45 @@
+﻿@model IEnumerable<provider.faculdade.model.Aluno>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Cadastrar Novo Aluno", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Matricula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CPF)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Matricula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CPF)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.Matricula }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.Matricula }) |
+            @Html.ActionLink("Excluir", "Delete", new { id=item.Matricula })
+        </td>
+    </tr>
+}
+
+</table>

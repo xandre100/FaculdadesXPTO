@@ -11,7 +11,7 @@
           </Key>
           <Property Name="Matricula" Type="int" Nullable="false" />
           <Property Name="Nome" Type="varchar" MaxLength="50" />
-          <Property Name="CPF" Type="int" />
+          <Property Name="CPF" Type="varchar" MaxLength="11" />
         </EntityType>
         <EntityType Name="Disciplina">
           <Key>
@@ -122,15 +122,10 @@
     <edmx:ConceptualModels>
       <Schema Namespace="FaculdadesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="FaculdadesDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Alunoes" EntityType="FaculdadesDBModel.Aluno" />
           <EntitySet Name="Disciplinas" EntityType="FaculdadesDBModel.Disciplina" />
           <EntitySet Name="Grades" EntityType="FaculdadesDBModel.Grade" />
           <EntitySet Name="Semestres" EntityType="FaculdadesDBModel.Semestre" />
           <EntitySet Name="Turmas" EntityType="FaculdadesDBModel.Turma" />
-          <AssociationSet Name="FK_Matricula" Association="FaculdadesDBModel.FK_Matricula">
-            <End Role="Aluno" EntitySet="Alunoes" />
-            <End Role="Grade" EntitySet="Grades" />
-          </AssociationSet>
           <AssociationSet Name="FK_IdDisciplina" Association="FaculdadesDBModel.FK_IdDisciplina">
             <End Role="Disciplina" EntitySet="Disciplinas" />
             <End Role="Grade" EntitySet="Grades" />
@@ -143,16 +138,12 @@
             <End Role="Turma" EntitySet="Turmas" />
             <End Role="Grade" EntitySet="Grades" />
           </AssociationSet>
+          <EntitySet Name="Alunoes" EntityType="FaculdadesDBModel.Aluno" />
+          <AssociationSet Name="FK_Matricula" Association="FaculdadesDBModel.FK_Matricula">
+            <End Role="Aluno" EntitySet="Alunoes" />
+            <End Role="Grade" EntitySet="Grades" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Aluno">
-          <Key>
-            <PropertyRef Name="Matricula" />
-          </Key>
-          <Property Name="Matricula" Type="Int32" Nullable="false" />
-          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CPF" Type="Int32" />
-          <NavigationProperty Name="Grades" Relationship="FaculdadesDBModel.FK_Matricula" FromRole="Aluno" ToRole="Grade" />
-        </EntityType>
         <EntityType Name="Disciplina">
           <Key>
             <PropertyRef Name="Id" />
@@ -172,10 +163,10 @@
           <Property Name="IdSemestre" Type="Int32" Nullable="false" />
           <Property Name="IdTurma" Type="Int32" Nullable="false" />
           <Property Name="Matricula" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Aluno" Relationship="FaculdadesDBModel.FK_Matricula" FromRole="Grade" ToRole="Aluno" />
           <NavigationProperty Name="Disciplina" Relationship="FaculdadesDBModel.FK_IdDisciplina" FromRole="Grade" ToRole="Disciplina" />
           <NavigationProperty Name="Semestre" Relationship="FaculdadesDBModel.FK_IdSemestre" FromRole="Grade" ToRole="Semestre" />
           <NavigationProperty Name="Turma" Relationship="FaculdadesDBModel.FK_IdTurma" FromRole="Grade" ToRole="Turma" />
+          <NavigationProperty Name="Aluno" Relationship="FaculdadesDBModel.FK_Matricula" FromRole="Grade" ToRole="Aluno" />
         </EntityType>
         <EntityType Name="Semestre">
           <Key>
@@ -193,18 +184,6 @@
           <Property Name="Turma1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Grades" Relationship="FaculdadesDBModel.FK_IdTurma" FromRole="Turma" ToRole="Grade" />
         </EntityType>
-        <Association Name="FK_Matricula">
-          <End Type="FaculdadesDBModel.Aluno" Role="Aluno" Multiplicity="1" />
-          <End Type="FaculdadesDBModel.Grade" Role="Grade" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Aluno">
-              <PropertyRef Name="Matricula" />
-            </Principal>
-            <Dependent Role="Grade">
-              <PropertyRef Name="Matricula" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_IdDisciplina">
           <End Type="FaculdadesDBModel.Disciplina" Role="Disciplina" Multiplicity="1" />
           <End Type="FaculdadesDBModel.Grade" Role="Grade" Multiplicity="*" />
@@ -241,21 +220,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Aluno">
+          <Key>
+            <PropertyRef Name="Matricula" />
+          </Key>
+          <Property Name="Matricula" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CPF" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Grades" Relationship="FaculdadesDBModel.FK_Matricula" FromRole="Aluno" ToRole="Grade" />
+        </EntityType>
+        <Association Name="FK_Matricula">
+          <End Type="FaculdadesDBModel.Aluno" Role="Aluno" Multiplicity="1" />
+          <End Type="FaculdadesDBModel.Grade" Role="Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aluno">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="Matricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FaculdadesDBModelStoreContainer" CdmEntityContainer="FaculdadesDBEntities">
-          <EntitySetMapping Name="Alunoes">
-            <EntityTypeMapping TypeName="FaculdadesDBModel.Aluno">
-              <MappingFragment StoreEntitySet="Aluno">
-                <ScalarProperty Name="CPF" ColumnName="CPF" />
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Disciplinas">
             <EntityTypeMapping TypeName="FaculdadesDBModel.Disciplina">
               <MappingFragment StoreEntitySet="Disciplina">
@@ -287,6 +278,15 @@
               <MappingFragment StoreEntitySet="Turma">
                 <ScalarProperty Name="Turma1" ColumnName="Turma" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Alunoes">
+            <EntityTypeMapping TypeName="FaculdadesDBModel.Aluno">
+              <MappingFragment StoreEntitySet="Aluno">
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

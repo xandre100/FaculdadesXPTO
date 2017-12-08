@@ -7,11 +7,7 @@ using System.Threading.Tasks;
 
 namespace provider.faculdade.model.repositorio
 {
-    public class GradeRepositorio : Dal<Grade>
+    public class SemestreRepositorio : Dal<Semestre>
     {
-        public GradeRepositorio()
-        {
-            
-        }
     }
 }
